@@ -1,16 +1,24 @@
 const uuidv4 = require('uuid/v4');
+const user = require('../routes/user');
+const dataBase = require('../data/orm');
 
 module.exports = app => {
-  const customerWalletsDB = app.data.customerWallets;
+  const customerWalletsDB = app.data.usersMock;
+
   const controller = {};
 
   const {
     customerWallets: customerWalletsMock,
   } = customerWalletsDB;
 
-  controller.listCustomerWallets = (req, res) => res.status(200).json(customerWalletsDB);
+  controller.listUsers = (req, res) => {
+    dataBase.userData(function (users) {
+      res.status(200).json(users);
+    })
+  }
 
-  controller.saveCustomerWallets = (req, res) => {
+
+  controller.insertUser = (req, res) => {
     customerWalletsMock.data.push({
       id: uuidv4(),
       parentId: uuidv4(),
@@ -26,7 +34,7 @@ module.exports = app => {
     res.status(201).json(customerWalletsMock);
   };
 
-  controller.removeCustomerWallets = (req, res) => {
+  controller.removeUser = (req, res) => {
     const {
       customerId,
     } = req.params;
@@ -49,8 +57,8 @@ module.exports = app => {
     }
   };
 
-  controller.updateCustomerWallets = (req, res) => {
-    const { 
+  controller.updateUser = (req, res) => {
+    const {
       customerId,
     } = req.params;
 
@@ -64,7 +72,7 @@ module.exports = app => {
       });
     } else {
       const newCustomer = {
-        id: customerId ,
+        id: customerId,
         parentId: req.body.parentId,
         name: req.body.name,
         birthDate: req.body.birthDate,
@@ -75,9 +83,9 @@ module.exports = app => {
         state: req.body.state,
         createdAt: new Date()
       };
-      
+
       customerWalletsMock.data.splice(foundCustomerIndex, 1, newCustomer);
-      
+
       res.status(200).json({
         message: 'Cliente encontrado e atualizado com sucesso!',
         success: true,

@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "build": "npm install",
-    "start": "node server.js"
+    "start": "pm2 start server.js",
+    "server": "node start server.js",
+    "dev": "pm2 start server.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +17,11 @@
     "config": "3.2.3",
     "consign": "0.1.6",
     "express": "4.17.1",
+    "md5": "^2.3.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "openrecord": "^2.11.0",
+    "pm2": "^4.5.1",
     "uuid": "3.3.3"
   }
 }
