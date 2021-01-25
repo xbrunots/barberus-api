@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "build": "npm install",
-    "start": "npm install; pm2 start server.js",
+    "start": "npm install; NODE_ENV=production npm start",
     "server": "node start server.js",
     "dev": "pm2 start server.js"
   },
