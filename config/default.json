@@ -1,5 +1,14 @@
 {
   "server": {
-    "port" : 8080
+    "port": 8080
+  },
+  "api": {
+    "version": "v1",
+    "public_routes": [
+      "/login",
+      "/logoff",
+      "/logout",
+      "/register"
+    ]
   }
 }
